@@ -1,0 +1,9 @@
+// All Shares for Manage Access from ODB – Excluding Teams Shares
+let starttime = now(-7d);
+let finishtime = now(-1m);
+OfficeActivity
+| where TimeGenerated between (starttime .. finishtime)
+| where OfficeWorkload == ("OneDrive")
+| where Operation in ("SharingSet","AddedToSecureLink")
+| where TargetUserOrGroupType == "Member"
+| where ApplicationId != "1fec8e78-bce4-4aaf-ab1b-5451cc387264"
